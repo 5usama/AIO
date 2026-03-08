@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIO Video Downloader - TikTok, YouTube, Facebook, Instagram Downloader</title>
+    <meta name="description" content="Free All in One Video Downloader - Download videos from TikTok, YouTube, Facebook, Instagram, Twitter and more">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .owner-info {
+            background: rgba(255,255,255,0.15);
+            padding: 15px 25px;
+            border-radius: 50px;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: fadeIn 1s ease;
+            font-size: 0.95rem;
+        }
+
+        .owner-info span {
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .owner-info i {
+            margin: 0 5px;
+            color: #fff;
+        }
+
+        /* Main Card */
+        .main-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 30px;
+            padding: 35px;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: slideUp 0.6s ease;
+        }
+
+        /* Intro Section */
+        .intro {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 2px dashed #e0e0e0;
+        }
+
+        .intro h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 2rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .intro p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 20px;
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecf2 100%);
+            padding: 12px 25px;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            font-weight: 500;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .feature i {
+            font-size: 1.2rem;
+        }
+
+        /* Platform Buttons */
+        .platform-section {
+            margin: 35px 0;
+        }
+
+        .platform-title {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #444;
+            font-size: 1.4rem;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .platform-title:after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            margin: 10px auto 0;
+            border-radius: 3px;
+        }
+
+        .platform-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .platform-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 18px 25px;
+            border: none;
+            border-radius: 20px;
+            background: white;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            min-width: 110px;
+            border: 2px solid transparent;
+        }
+
+        .platform-btn:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .platform-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #fff;
+        }
+
+        .platform-btn .icon {
+            font-size: 2.8rem;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
+
+        .platform-btn .name {
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .platform-btn.tiktok { 
+            border-bottom: 4px solid #00f2ea;
+            background: linear-gradient(to bottom, #fff, #f0f0f0);
+        }
+        .platform-btn.tiktok.active { background: linear-gradient(135deg, #00f2ea, #00c8c0); }
+        
+        .platform-btn.youtube { 
+            border-bottom: 4px solid #ff0000;
+            background: linear-gradient(to bottom, #fff, #f0f0f0);
+        }
+        .platform-btn.youtube.active { background: linear-gradient(135deg, #ff0000, #cc0000); }
+        
+        .platform-btn.facebook { 
+            border-bottom: 4px solid #1877f2;
+            background: linear-gradient(to bottom, #fff, #f0f0f0);
+        }
+        .platform-btn.facebook.active { background: linear-gradient(135deg, #1877f2, #0e5ab3); }
+        
+        .platform-btn.instagram { 
+            border-bottom: 4px solid #e4405f;
+            background: linear-gradient(to bottom, #fff, #f0f0f0);
+        }
+        .platform-btn.instagram.active { background: linear-gradient(135deg, #e4405f, #c13584); }
+        
+        .platform-btn.others { 
+            border-bottom: 4px solid #6c757d;
+            background: linear-gradient(to bottom, #fff, #f0f0f0);
+        }
+        .platform-btn.others.active { background: linear-gradient(135deg, #6c757d, #495057); }
+
+        /* URL Input Section */
+        .url-section {
+            background: linear-gradient(135deg, #f8faff 0%, #f0f3ff 100%);
+            padding: 35px;
+            border-radius: 25px;
+            margin: 30px 0;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .url-input-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .url-input-group input {
+            flex: 1;
+            padding: 18px 25px;
+            border: 2px solid #e0e4ff;
+            border-radius: 15px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            min-width: 250px;
+            background: white;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .url-input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+
+        .url-input-group input::placeholder {
+            color: #a0a7c9;
+            font-style: italic;
+        }
+
+        .url-input-group button {
+            padding: 18px 45px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .url-input-group button:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .url-input-group button:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .url-input-group button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .selected-platform {
+            margin-top: 15px;
+            color: #5a67a0;
+            font-style: italic;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .selected-platform i {
+            font-size: 1.2rem;
+        }
+
+        /* Loading Spinner */
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #667eea;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        .loading p {
+            color: #4a5568;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Results Section */
+        .results {
+            display: none;
+            margin-top: 35px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8faff 0%, #f0f3ff 100%);
+            border-radius: 25px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .results h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .video-info {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .thumbnail {
+            width: 220px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border: 3px solid white;
+        }
+
+        .details {
+            flex: 1;
+        }
+
+        .details h4 {
+            color: #2d3748;
+            margin-bottom: 12px;
+            font-size: 1.3rem;
+        }
+
+        .details p {
+            color: #4a5568;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .details p strong {
+            color: #667eea;
+            min-width: 80px;
+        }
+
+        .download-section h4 {
+            color: #2d3748;
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .download-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            box-shadow: 0 8px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(102, 126, 234, 0.3);
+            border-color: white;
+        }
+
+        .download-btn i {
+            font-size: 1.2rem;
+        }
+
+        /* Error Message */
+        .error-message {
+            display: none;
+            background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+            color: #c53030;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 25px 0;
+            text-align: center;
+            border-left: 5px solid #fc8181;
+            font-weight: 500;
+            box-shadow: 0 5px 15px rgba(197, 48, 48, 0.1);
+        }
+
+        .error-message i {
+            font-size: 1.5rem;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 35px;
+            color: rgba(255,255,255,0.9);
+            font-size: 0.95rem;
+            padding: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .footer a {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .footer i {
+            margin: 0 5px;
+            color: #ff6b6b;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .platform-btn {
+                min-width: calc(50% - 20px);
+                padding: 15px;
+            }
+            
+            .url-input-group {
+                flex-direction: column;
+            }
+            
+            .url-input-group button {
+                width: 100%;
+            }
+            
+            .main-card {
+                padding: 20px;
+            }
+            
+            .features {
+                gap: 10px;
+            }
+            
+            .feature {
+                width: calc(50% - 10px);
+                justify-content: center;
+            }
+            
+            .owner-info {
+                font-size: 0.8rem;
+                padding: 10px 15px;
+            }
+            
+            .thumbnail {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .platform-btn {
+                min-width: 100%;
+            }
+            
+            .feature {
+                width: 100%;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .intro h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header with Owner Information -->
+        <div class="header">
+            <h1>🎥 AIO Video Downloader</h1>
+            <p>Download videos from any platform - 100% Free & Fast</p>
+            <div class="owner-info">
+                <span>👑 Owner:</span> Mudasir Hussain 
+                <i>•</i> 
+                <span>💻 Developer:</span> Mudasir Hussain 
+                <i>•</i> 
+                <span>🎨 Creator:</span> Mudasir Hussain
+            </div>
+        </div>
+
+        <!-- Main Card -->
+        <div class="main-card">
+            <!-- Intro Section -->
+            <div class="intro">
+                <h2>✨ Welcome to AIO Video Downloader</h2>
+                <p>Free online tool to download videos from any social media platform. Just paste the URL and click download!</p>
+                
+                <div class="features">
+                    <div class="feature">
+                        <i>🎯</i> 100% Free
+                    </div>
+                    <div class="feature">
+                        <i>⚡</i> Fast Download
+                    </div>
+                    <div class="feature">
+                        <i>🎨</i> HD Quality
+                    </div>
+                    <div class="feature">
+                        <i>🌍</i> All Platforms
+                    </div>
+                    <div class="feature">
+                        <i>🔒</i> Safe & Secure
+                    </div>
+                </div>
+            </div>
+
+            <!-- Platform Buttons -->
+            <div class="platform-section">
+                <h3 class="platform-title">📱 Select Platform</h3>
+                <div class="platform-buttons">
+                    <button class="platform-btn tiktok active" onclick="selectPlatform('tiktok', this)">
+                        <span class="icon">🎵</span>
+                        <span class="name">TikTok</span>
+                    </button>
+                    
+                    <button class="platform-btn youtube" onclick="selectPlatform('youtube', this)">
+                        <span class="icon">▶️</span>
+                        <span class="name">YouTube</span>
+                    </button>
+                    
+                    <button class="platform-btn facebook" onclick="selectPlatform('facebook', this)">
+                        <span class="icon">📘</span>
+                        <span class="name">Facebook</span>
+                    </button>
+                    
+                    <button class="platform-btn instagram" onclick="selectPlatform('instagram', this)">
+                        <span class="icon">📷</span>
+                        <span class="name">Instagram</span>
+                    </button>
+                    
+                    <button class="platform-btn others" onclick="selectPlatform('others', this)">
+                        <span class="icon">🌐</span>
+                        <span class="name">Others</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- URL Input Section -->
+            <div class="url-section">
+                <div class="url-input-group">
+                    <input type="url" id="urlInput" placeholder="Paste your video URL here... (e.g., https://tiktok.com/@user/video/123456)" value="">
+                    <button onclick="downloadVideo()" id="downloadBtn">
+                        <span>🔽</span> Download Video
+                    </button>
+                </div>
+                <div class="selected-platform" id="selectedPlatform">
+                    <i>🎯</i> Selected: TikTok (Auto-detect also works)
+                </div>
+            </div>
+
+            <!-- Loading Spinner -->
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>⏳ Fetching video information...</p>
+                <p style="font-size: 0.9rem; color: #718096;">Please wait, this may take a few seconds</p>
+            </div>
+
+            <!-- Error Message -->
+            <div class="error-message" id="errorMessage">
+                <i>⚠️</i> <span id="errorText"></span>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results" id="results">
+                <h3>
+                    <i>📥</i> Download Ready!
+                </h3>
+                
+                <div class="video-info" id="videoInfo">
+                    <!-- Will be filled by JavaScript -->
+                </div>
+
+                <div class="download-section">
+                    <h4><i>📊</i> Available Qualities:</h4>
+                    <div class="download-links" id="downloadLinks">
+                        <!-- Will be filled by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2025 AIO Video Downloader. All rights reserved.</p>
+            <p>Made with <i>❤️</i> by <a href="#">Mudasir Hussain</a> | <a href="#">GitHub</a> | <a href="#">Contact</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentPlatform = 'tiktok';
+        
+        // Platform selection function
+        function selectPlatform(platform, element) {
+            // Update active class
+            document.querySelectorAll('.platform-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            element.classList.add('active');
+            
+            // Update current platform
+            currentPlatform = platform;
+            
+            // Update selected platform text
+            const platformNames = {
+                tiktok: 'TikTok',
+                youtube: 'YouTube',
+                facebook: 'Facebook',
+                instagram: 'Instagram',
+                others: 'Other Platforms'
+            };
+            
+            document.getElementById('selectedPlatform').innerHTML = 
+                `<i>🎯</i> Selected: ${platformNames[platform]} (Auto-detect also works)`;
+            
+            // Update placeholder based on platform
+            const placeholders = {
+                tiktok: 'https://tiktok.com/@username/video/123456',
+                youtube: 'https://youtube.com/watch?v=123456',
+                facebook: 'https://facebook.com/watch/?v=123456',
+                instagram: 'https://instagram.com/p/ABC123',
+                others: 'https://example.com/video'
+            };
+            
+            document.getElementById('urlInput').placeholder = `Enter URL (e.g., ${placeholders[platform]})`;
+        }
+
+        // Main download function
+        async function downloadVideo() {
+            const urlInput = document.getElementById('urlInput');
+            const url = urlInput.value.trim();
+            
+            if (!url) {
+                showError('Please enter a valid URL');
+                return;
+            }
+
+            // Validate URL format
+            try {
+                new URL(url);
+            } catch {
+                showError('Please enter a valid URL (include https://)');
+                return;
+            }
+
+            // Show loading, hide previous results/errors
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'none';
+            document.getElementById('downloadBtn').disabled = true;
+
+            try {
+                // Get base URL dynamically
+                const baseUrl = window.location.origin;
+                console.log('Sending request to:', `${baseUrl}/api/download?url=${encodeURIComponent(url)}`);
+                
+                // Call our backend API
+                const response = await fetch(`${baseUrl}/api/download?url=${encodeURIComponent(url)}`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log('API Response:', data);
+
+                if (data.status && data.result && data.result.downloadUrls && Object.keys(data.result.downloadUrls).length > 0) {
+                    displayResults(data);
+                } else {
+                    showError(data.error || 'Failed to fetch video. Please check the URL and try again.');
+                }
+            } catch (error) {
+                console.error('Download error:', error);
+                showError('Network error. Please try again later. Error: ' + error.message);
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('downloadBtn').disabled = false;
+            }
+        }
+
+        // Display results
+        function displayResults(data) {
+            const result = data.result;
+            const platform = data.platform || 'unknown';
+            
+            // Format duration if available
+            const duration = result.duration && result.duration !== 'Unknown' ? result.duration : 'N/A';
+            
+            // Video info HTML
+            let videoInfoHTML = `
+                ${result.thumbnail ? `<img src="${result.thumbnail}" alt="Thumbnail" class="thumbnail" onerror="this.src='https://via.placeholder.com/220x160?text=No+Thumbnail'">` : ''}
+                <div class="details">
+                    <h4>${result.title || 'Untitled Video'}</h4>
+                    <p><strong>Duration:</strong> <i>⏱️</i> ${duration}</p>
+                    <p><strong>Platform:</strong> <i>📱</i> ${platform.toUpperCase()}</p>
+                    ${result.videoCount ? `<p><strong>Videos:</strong> <i>🎬</i> ${result.videoCount}</p>` : ''}
+                    ${result.imageCount ? `<p><strong>Images:</strong> <i>🖼️</i> ${result.imageCount}</p>` : ''}
+                    <p><strong>Source:</strong> <i>🔗</i> ${data.source || 'Direct'}</p>
+                </div>
+            `;
+            
+            document.getElementById('videoInfo').innerHTML = videoInfoHTML;
+            
+            // Download links HTML
+            const downloadUrls = result.downloadUrls;
+            let linksHTML = '';
+            
+            if (Array.isArray(downloadUrls)) {
+                downloadUrls.forEach(item => {
+                    if (item.url) {
+                        linksHTML += `
+                            <a href="${item.url}" class="download-btn" target="_blank" rel="noopener noreferrer" download>
+                                <i>📥</i> ${item.quality || 'Download'} (${item.format || 'Unknown'})
+                            </a>
+                        `;
+                    }
+                });
+            } else if (typeof downloadUrls === 'object') {
+                for (const [quality, url] of Object.entries(downloadUrls)) {
+                    if (url && typeof url === 'string') {
+                        linksHTML += `
+                            <a href="${url}" class="download-btn" target="_blank" rel="noopener noreferrer" download>
+                                <i>📥</i> ${quality}
+                            </a>
+                        `;
+                    } else if (url && url.url) {
+                        linksHTML += `
+                            <a href="${url.url}" class="download-btn" target="_blank" rel="noopener noreferrer" download>
+                                <i>📥</i> ${url.quality || quality}
+                            </a>
+                        `;
+                    }
+                }
+            }
+            
+            // If no links found
+            if (!linksHTML) {
+                linksHTML = '<p style="text-align: center; color: #718096; grid-column: 1/-1; padding: 20px;">No download links available for this video.</p>';
+            }
+            
+            document.getElementById('downloadLinks').innerHTML = linksHTML;
+            
+            // Show results
+            document.getElementById('results').style.display = 'block';
+            
+            // Scroll to results
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Show error message
+        function showError(message) {
+            document.getElementById('errorText').innerText = message;
+            document.getElementById('errorMessage').style.display = 'block';
+            
+            // Auto hide after 5 seconds
+            setTimeout(() => {
+                document.getElementById('errorMessage').style.display = 'none';
+            }, 5000);
+        }
+
+        // Auto-detect platform from URL (for input change)
+        document.getElementById('urlInput').addEventListener('input', function(e) {
+            const url = e.target.value.toLowerCase();
+            
+            if (url.includes('tiktok.com')) {
+                highlightPlatform('tiktok');
+            } else if (url.includes('youtube.com') || url.includes('youtu.be')) {
+                highlightPlatform('youtube');
+            } else if (url.includes('facebook.com') || url.includes('fb.com')) {
+                highlightPlatform('facebook');
+            } else if (url.includes('instagram.com')) {
+                highlightPlatform('instagram');
+            } else if (url.includes('twitter.com') || url.includes('x.com')) {
+                highlightPlatform('others');
+            } else if (url.includes('pinterest.com')) {
+                highlightPlatform('others');
+            } else if (url.includes('vimeo.com')) {
+                highlightPlatform('others');
+            }
+        });
+
+        // Helper to highlight platform
+        function highlightPlatform(platform) {
+            document.querySelectorAll('.platform-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            const targetBtn = document.querySelector(`.platform-btn.${platform}`);
+            if (targetBtn) {
+                targetBtn.classList.add('active');
+                currentPlatform = platform;
+                
+                const platformNames = {
+                    tiktok: 'TikTok',
+                    youtube: 'YouTube',
+                    facebook: 'Facebook',
+                    instagram: 'Instagram',
+                    others: 'Other Platforms'
+                };
+                
+                document.getElementById('selectedPlatform').innerHTML = 
+                    `<i>🎯</i> Selected: ${platformNames[platform]} (Auto-detected)`;
+            }
+        }
+
+        // Enter key support
+        document.getElementById('urlInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                downloadVideo();
+            }
+        });
+
+        // Test API connection on page load
+        window.addEventListener('load', async function() {
+            try {
+                const baseUrl = window.location.origin;
+                const response = await fetch(`${baseUrl}/api/status`);
+                if (response.ok) {
+                    console.log('✅ API connection successful');
+                } else {
+                    console.warn('⚠️ API connection issue');
+                }
+            } catch (error) {
+                console.error('❌ API connection failed:', error);
+            }
+        });
+    </script>
+</body>
+</html>
