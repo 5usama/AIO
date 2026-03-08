@@ -1,23 +1,16 @@
 {
   "name": "aio-video-downloader",
   "version": "1.0.0",
-  "description": "All in One Video Downloader - TikTok, YouTube, Facebook, Instagram, and more",
-  "main": "index.js",
+  "description": "All in One Video Downloader",
+  "main": "api/server.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node api/server.js",
+    "dev": "nodemon api/server.js"
   },
-  "keywords": ["video-downloader", "tiktok", "youtube", "facebook", "instagram", "downloader"],
-  "author": "Mudasir Hussain",
-  "license": "MIT",
   "dependencies": {
     "express": "^4.18.2",
     "cheerio": "^1.0.0-rc.12",
     "crypto-js": "^4.1.1",
-    "axios": "^1.6.2",
     "cors": "^2.8.5"
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.2"
   }
 }
